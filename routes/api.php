@@ -3,8 +3,16 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-Route::get('users', 'UsersController@getUsersList');
-Route::get('users/{userId}', 'UsersController@getUserById');
+
+Route::group([
+    'middleware' => 'api',
+    'prefix' => 'users'
+], function ($router) {
+    Route::group(['middleware' => 'jwt.auth'], function () {
+        Route::get('/', 'UsersController@getUsersList');
+        Route::get('/{userId}', 'UsersController@getUserById');
+    });
+});
 // Request
 // Fund
 // Rent
@@ -18,8 +26,15 @@ Route::get('users/{userId}', 'UsersController@getUserById');
 // Review
 
 /// Auth
-// Login
-// Logout
-// Register
-Route::post('auth/register', 'AuthController@signUpNewUser');
-Route::post('auth/login', 'AuthController@login');
+Route::group([
+    'middleware' => 'api',
+    'prefix' => 'auth'
+], function ($router) {
+    Route::post('login', 'AuthController@login')->name('login');
+    Route::post('register', 'AuthController@register')->name('register');
+    Route::get('/token/refresh', 'AuthController@refresh');
+
+    Route::group(['middleware' => 'jwt.auth'], function () {
+        Route::post('logout', 'AuthController@logout')->name('logout');
+    });
+});
