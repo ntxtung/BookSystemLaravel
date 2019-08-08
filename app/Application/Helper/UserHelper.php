@@ -21,13 +21,13 @@ class UserHelper {
 
     public function getBasicUserById($userId) {
         $targetUser = new BasicUserDtos();
-        $targetUser->parseUser(Users::find($userId));
+        $targetUser->parseUser($this->findUserById($userId));
         return $targetUser;
     }
 
     public function getFullUserById($userId) {
         $targetUser = new FullUserDtos();
-        $targetUser->parseUser(Users::find($userId));
+        $targetUser->parseUser($this->findUserById($userId));
         return $targetUser;
     }
 }

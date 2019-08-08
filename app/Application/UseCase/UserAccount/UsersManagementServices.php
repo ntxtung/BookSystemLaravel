@@ -18,10 +18,17 @@ class UsersManagementServices {
     }
 
     public function getUserById($requestId, $userId) {
+        $responseUser = null;
         if ($requestId == $userId) {
-            return $this->userHelper->getFullUserById($userId);
+            $responseUser = $this->userHelper->getFullUserById($userId);
         } else {
-            return $this->userHelper->getBasicUserById($userId);
+            $responseUser = $this->userHelper->getBasicUserById($userId);
+        }
+        if ($responseUser != null) {
+            return $responseUser;
+        } else {
+//            throw new Ex
+            return null;
         }
     }
 

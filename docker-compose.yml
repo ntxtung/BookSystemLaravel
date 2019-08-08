@@ -23,7 +23,7 @@ services:
   #Nginx Service
   webserver:
     image: nginx:alpine
-    container_name: BookSystemApp_webserver
+    container_name: BookSystem_webserver
     restart: unless-stopped
     tty: true
     ports:
