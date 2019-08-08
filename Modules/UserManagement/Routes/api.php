@@ -8,7 +8,7 @@ Route::group([
     'prefix' => 'users'
 ], function ($router) {
     Route::group(['middleware' => 'jwt.auth'], function () {
-        Route::get('/', 'UsersController@getUsersList');
-        Route::get('/{userId}', 'UsersController@getUserById');
+        Route::get('/', 'UserManagementController@getUsersList');
+        Route::get('/{userId}', 'UserManagementController@getUserById');
     });
 });
