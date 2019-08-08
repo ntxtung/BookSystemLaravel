@@ -68,7 +68,7 @@ return [
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
-            'model' => App\Domain\Entities\Users::class,
+            'model' => Modules\BookSystem\Domain\Entities\Users::class,
         ],
 
         // 'users' => [
